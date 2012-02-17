@@ -1,0 +1,1 @@
+require 'fuseki/cell'
