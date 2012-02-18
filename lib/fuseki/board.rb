@@ -1,7 +1,7 @@
 class Board
   NEIGHBOURS_COORDS = [[-1, 0], [0, -1], [1, 0], [0, 1]].freeze
 
-  attr_reader :cells
+  attr_reader :cells, :size
 
   def initialize(size)
     @size = size

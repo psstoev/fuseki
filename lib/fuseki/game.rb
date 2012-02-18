@@ -14,13 +14,16 @@ class Game
     if @moves[-1].make_move(x, y)
       change_player
       next_move
+      return true
     end
+
+    false
   end
 
   def cells
-    Hash.new(@board.cells.map do |coords, cell|
-      [coords, cell.player]
-    end.flatten(1))
+    hash = {}
+    @board.cells.map { |coords, cell| hash[coords] = cell.player }
+    hash
   end
 
   private

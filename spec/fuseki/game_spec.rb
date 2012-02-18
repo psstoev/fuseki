@@ -21,7 +21,10 @@ describe Game do
 
   it 'shows the cells' do
     game = Game.new board: 2
-    game.cells.should == {}
+    game.cells.should == {[0, 0] => nil, [0, 1] => nil, [1, 0] => nil, [1, 1] => nil}
+
+    game.move(0, 0)
+    game.cells.should == {[0, 0] => :black, [0, 1] => nil, [1, 0] => nil, [1, 1] => nil}
   end
 
   it 'does not mess the moves' do
