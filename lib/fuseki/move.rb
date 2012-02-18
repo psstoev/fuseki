@@ -8,7 +8,7 @@ class Move
   end
 
   def make_move(x, y)
-    if legal(x, y)
+    if legal?(x, y)
       @board[x, y].occupy @player
       @invalid << [x, y]
       capture
@@ -24,7 +24,7 @@ class Move
 
   private
 
-  def legal(x, y)
+  def legal?(x, y)
     @board.include?(x, y) &&
       @board[x, y].empty? &&
       @invalid.index([x, y]).nil?
@@ -32,7 +32,9 @@ class Move
 
   def suicides
     @board.cells.select do |coords, cell|
-      cell.empty? && cell.liberties.count == 0
+      cell.empty? &&
+        cell.liberties.count == 0 &&
+        !cell.neighbours.none? { |neighbour| neighbour.player == @player }
     end.map { |coords, cell| coords }.to_a
   end
 
@@ -43,6 +45,9 @@ class Move
     dead_groups.each do |group|
       @captures += group.cells.map { |cell| @board.cells.key(cell) }
     end
-    @captures.each { |capture| @board[*capture].unoccupy }
+    @captures.each do |capture|
+      @board[*capture].unoccupy
+      @invalid.delete capture
+    end
   end
 end

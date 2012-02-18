@@ -59,5 +59,6 @@ describe Move do
 
     move3.captures.should == [[0, 0]]
     @board[0, 0].should be_empty
+    move3.send(:legal?, 0, 0).should be_true
   end
 end
