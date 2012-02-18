@@ -70,4 +70,27 @@ describe Move do
     move3 = Move.new :black, @board, move2
     move3.make_move(0, 0).should be_true
   end
+
+  it "doesn't violate the ko rule" do
+    move1 = Move.new :black, @board, nil
+    move1.make_move(0, 1)
+
+    move2 = Move.new :white, @board, move1
+    move2.make_move(1, 1)
+
+    move3 = Move.new :black, @board, move2
+    move3.make_move(1, 0)
+
+    move4 = Move.new :white, @board, move3
+    move4.make_move(0, 2)
+
+    move5 = Move.new :black, @board, move4
+    move5.make_move(4, 4)
+
+    move6 = Move.new :white, @board, move5
+    move6.make_move(0, 0)
+
+    move7 = Move.new :black, @board, move6
+    move7.make_move(0, 1).should be_false
+  end
 end

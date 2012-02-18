@@ -1,8 +1,8 @@
 class Move
   attr_accessor :captures
 
-  def initialize(player, board, previos)
-    @player, @board, @previos = player, board, previos
+  def initialize(player, board, previous)
+    @player, @board, @previous = player, board, previous
     @captures = []
   end
 
@@ -21,7 +21,14 @@ class Move
   def legal?(x, y)
     @board.include?(x, y) &&
       @board[x, y].empty? &&
-      suicides.index(@board[x, y]).nil?
+      suicides.index(@board[x, y]).nil? &&
+      not_ko?(x, y)
+  end
+
+  def not_ko?(x, y)
+    @previous.nil? ||
+      @previous.captures.count != 1 || 
+      @previous.captures[0] != [x, y]
   end
 
   def suicide?(cell)
