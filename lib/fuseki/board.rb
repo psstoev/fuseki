@@ -8,6 +8,12 @@ class Board
     @cells.each { |coords, cell| introduce_neighbours coords, cell }
   end
 
+  def to_s
+    (0...@size).map do |x|
+      (0...@size).map { |y| self[x, y] }.join ''
+    end.join "\n"
+  end
+
   def [](x, y)
     @cells[[x, y]]
   end
@@ -28,7 +34,7 @@ class Board
     NEIGHBOURS_COORDS.each do |dcoords|
       x, y = coords[0] + dcoords[0], coords[1] + dcoords[1]
       if (0...@size).include?(x) && (0...@size).include?(y)
-        cell.add_neighbour @cells[coords]
+        cell.add_neighbour @cells[[x, y]]
       end
     end
   end

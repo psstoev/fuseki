@@ -5,6 +5,11 @@ describe Board do
     board = Board.new 3
   end
 
+  it 'can print itself' do
+    board = Board.new 2
+    board.to_s.should == "##\n##"
+  end
+
   it "can be indexed to retrieve its' cells" do
     board = Board.new 2
     board[0, 1].occupy :black
@@ -29,5 +34,7 @@ describe Board do
     board[1, 1].neighbours.size.should == 4
 
     board[0, 0].neighbours.map { |n| n.object_id } =~ [board[0, 1].object_id, board[1, 0].object_id]
+    board[0, 1].neighbours.map { |n| n.object_id } =~ [board[0, 0].object_id, board[1, 1].object_id, board[1, 0].object_id]
+    board[1, 1].neighbours.map { |n| n.object_id } =~ [board[0, 1].object_id, board[1, 0].object_id, board[2, 1].object_id, board[1, 2].object_id]
   end
 end
