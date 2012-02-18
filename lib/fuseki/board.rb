@@ -8,7 +8,6 @@ class Board
     @cells = {}
     make_cells
     @cells.each { |coords, cell| introduce_neighbours coords, cell }
-    @groups = []
   end
 
   def to_s
@@ -26,10 +25,11 @@ class Board
   end
 
   def groups
+    groups = []
     @cells.values.map do |cell|
-      @groups << cell.group if !cell.empty? && @groups.index(cell.group).nil?
+      groups << cell.group if !cell.empty? && groups.index(cell.group).nil?
     end
-    @groups
+    groups
   end
 
   private
