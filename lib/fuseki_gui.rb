@@ -5,7 +5,7 @@ class Goban
     @app = app
     @game = game
     @board_size = game.board.size
-    @square_size = 100
+    @square_size = @app.width / (@board_size + 1)
   end
 
   def draw_board
@@ -45,8 +45,8 @@ class Goban
   end
 end
 
-Shoes.app width: 600, height: 600 do
-  goban = Goban.new(Game.new(board: 5), self)
+Shoes.app width: 700, height: 700 do
+  goban = Goban.new(Game.new(board: 13), self)
 
   background "#FFC125"
   goban.draw_board
