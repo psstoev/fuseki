@@ -1,11 +1,14 @@
 class Board
   NEIGHBOURS_COORDS = [[-1, 0], [0, -1], [1, 0], [0, 1]].freeze
 
+  attr_reader :cells
+
   def initialize(size)
     @size = size
     @cells = {}
     make_cells
     @cells.each { |coords, cell| introduce_neighbours coords, cell }
+    @groups = []
   end
 
   def to_s
@@ -20,6 +23,13 @@ class Board
 
   def include?(x, y)
     !@cells[[x, y]].nil?
+  end
+
+  def groups
+    @cells.values.map do |cell|
+      @groups << cell.group if !cell.empty? && @groups.index(cell.group).nil?
+    end
+    @groups
   end
 
   private

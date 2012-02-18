@@ -37,4 +37,11 @@ describe Board do
     board[0, 1].neighbours.map { |n| n.object_id } =~ [board[0, 0].object_id, board[1, 1].object_id, board[1, 0].object_id]
     board[1, 1].neighbours.map { |n| n.object_id } =~ [board[0, 1].object_id, board[1, 0].object_id, board[2, 1].object_id, board[1, 2].object_id]
   end
+
+  it "keeps track of its' groups" do
+    board = Board.new 2
+
+    board[0, 0].occupy :black
+    board.groups.should == [board[0, 0].group]
+  end
 end

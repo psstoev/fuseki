@@ -51,6 +51,16 @@ describe Cell do
     cell2.neighbours.size.should == 1
   end
 
+  it "can keep track of its' liberties" do
+    cell1 = Cell.new
+    cell2 = Cell.new
+
+    cell1.add_neighbour cell2
+    cell2.add_neighbour cell1
+
+    cell1.liberties.count.should == 1
+  end
+
   it 'starts belonging to a group when occupied' do
     cell = Cell.new
 

@@ -19,4 +19,14 @@ class Group
       cell.group = self
     end
   end
+
+  def liberties
+    @liberties = []
+    @cells.each do |cell|
+      @liberties += cell.liberties.select do |liberty|
+        @liberties.index(liberty).nil?
+      end.to_a
+    end
+    @liberties
+  end
 end

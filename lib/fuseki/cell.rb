@@ -39,6 +39,10 @@ class Cell
     same_cells[0].group
   end
 
+  def liberties
+    @neighbours.select { |neighbour| neighbour.empty? }
+  end
+
   private
 
   def same_color_neighbours

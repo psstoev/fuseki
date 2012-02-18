@@ -57,4 +57,15 @@ describe Group do
     group1.cells.count.should == 2
     cell2.group.object_id.should == group1.object_id
   end
+
+  it 'has the correct number of liberties' do
+    cell1 = Cell.new
+    cell2 = Cell.new
+
+    cell1.add_neighbour cell2
+    cell2.add_neighbour cell1
+
+    cell1.occupy :black
+    cell1.group.liberties.count.should == 1
+  end
 end
