@@ -6,7 +6,7 @@ RSpec::Core::RakeTask.new(:spec) do |spec|
 end
 
 task :skeptic do
-  OPTS = '--no-semicolons --line-length 80 --max-nesting-depth 2 --methods-per-class 8 --lines-per-method 5'.freeze
+  OPTS = '--no-semicolons --line-length 80 --max-nesting-depth 2 --methods-per-class 10 --lines-per-method 5'.freeze
   fuseki_dir = Dir.new('lib/fuseki')
   file_names = fuseki_dir.select { |file_name| file_name =~ /.+\.rb$/ }
   files = file_names.map { |file| File.join fuseki_dir.path, file }
